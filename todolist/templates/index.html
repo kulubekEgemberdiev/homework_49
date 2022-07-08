@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Главная {% endblock %}
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="#" title="Создать задачу">Создать задачу</a>
+    </li>
+{% endblock %}
+{% block search-block %}
+<form class="d-flex" action="#">
+            <input class="form-control me-2" type="search" placeholder="Введите название" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit" title="Поиск"><span class="material-symbols-outlined"
+                                                                      style="color: white; font-weight: bolder;">
+search</span></button>
+        </form>
+{% endblock %}
+
+{% block content %}
+    <h1>Список задач</h1>
+    <div class="row">
+        {% for some in todolist %}
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card bg-light" style="width: 18rem;">
+                        <div class="card-body bg-light">
+                            <h4 class="card-title text-dark">{{ some.summary }} №{{ some.id }}</h4>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-light"><b>Тип: </b>{{ some.type }}.</li>
+                            <li class="list-group-item bg-light"><b>Статус: </b>{{ some.status }}.</li>
+                        </ul>
+                        <div class="card-body bg-light">
+                            <a href="#" class="card-link" title="Подробнее"><span
+                                    class="material-symbols-outlined">visibility</span></a>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
