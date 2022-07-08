@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views import View
 from django.views.generic import TemplateView
 
 # Create your views here.
@@ -20,3 +21,11 @@ class DetailView(TemplateView):
         todo = get_object_or_404(TodolistModel, pk=pk)
         kwargs["todo"] = todo
         return super().get_context_data(**kwargs)
+
+
+class DeleteView(View):
+    def post(self, request, *args, **kwargs):
+        pk = kwargs.get("pk")
+        todo = get_object_or_404(TodolistModel, pk=pk)
+        todo.delete()
+        return redirect("index")

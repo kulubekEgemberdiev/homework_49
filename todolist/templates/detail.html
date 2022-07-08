@@ -20,5 +20,25 @@
     <p><b>Время создания:</b> {{ todo.created_date|date:"Y-m-d H:i:s." }}</p>
     <p><b>Время изменения:</b> {{ todo.updated_date|date:"Y-m-d H:i:s." }}</p>
 
-A
+{#    ---------------------------------------------------------------#}
+    <div class="modal" tabindex="-1" id="DeleteTodo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="DeleteTodo">{{ todo.summary }} №{{ todo.id }}</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите удалить эту задачу?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Нет</button>
+                    <form action="{% url 'delete' todo.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
