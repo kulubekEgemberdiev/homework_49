@@ -3,14 +3,20 @@ from django.views import View
 from django.views.generic import TemplateView
 
 # Create your views here.
-from todolist.form import TodoForm
+from todolist.form import TodoForm, SearchForm
 from todolist.models import TodolistModel
 
 
 class Index(TemplateView):
     def get(self, request, *args, **kwargs):
-        todolist = TodolistModel.objects.order_by("id")
-        context = {"todolist": todolist}
+        search_form = SearchForm(data=request.GET)
+        todolist = TodolistModel.objects.all()
+        if search_form.is_valid():
+            search = search_form.cleaned_data.get("search_field")
+            if search:
+                todolist = todolist.filter(id__contains=search)
+        todolist = todolist.order_by("-created_date")
+        context = {"todolist": todolist, "form": search_form}
         return render(request, "index.html", context)
 
 

@@ -4,16 +4,13 @@
 {% block title %} Главная {% endblock %}
 {% block nav %}
     <li class="nav-item">
-        <a class="nav-link" href="#" title="Создать задачу">Создать задачу</a>
+        <a class="nav-link" href="{% url 'create' %}" title="Создать задачу">Создать задачу</a>
     </li>
 {% endblock %}
 {% block search-block %}
-<form class="d-flex" action="#">
-            <input class="form-control me-2" type="search" placeholder="Введите название" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit" title="Поиск"><span class="material-symbols-outlined"
-                                                                      style="color: white; font-weight: bolder;">
-search</span></button>
-        </form>
+    <form action="" method="get">
+    {% include "partial/forms.html" with button_text="Поиск" %}
+    </form>
 {% endblock %}
 
 {% block content %}
