@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Просмотр{% endblock %}
+{% block nav %}
+    <li class="nav-item">
+        <a href="#" class="nav-link" title="Создать задачу">Создать</a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link" title="Изменить задачу">Редактировать</a>
+    </li>
+    <li class="nav-item">
+        <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#DeleteTodo" title="Удалить задачу">Удалить</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <h1>Просмотр задачи.</h1><br><br>
+    <h3>{{ todo.summary }} №{{ todo.id }}</h3>
+    <p><b>Описание:</b> {{ todo.description }}</p>
+    <p><b>Тип:</b> {{ todo.type }}</p>
+    <p><b>Статус:</b> {{ todo.status }}</p>
+    <p><b>Время создания:</b> {{ todo.created_date|date:"Y-m-d H:i:s." }}</p>
+    <p><b>Время изменения:</b> {{ todo.updated_date|date:"Y-m-d H:i:s." }}</p>
+
+A
+{% endblock %}

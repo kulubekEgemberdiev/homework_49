@@ -30,7 +30,7 @@ search</span></button>
                             <li class="list-group-item bg-light"><b>Статус: </b>{{ some.status }}.</li>
                         </ul>
                         <div class="card-body bg-light">
-                            <a href="#" class="card-link" title="Подробнее"><span
+                            <a href="{% url 'detail' some.id %}" class="card-link" title="Подробнее"><span
                                     class="material-symbols-outlined">visibility</span></a>
                         </div>
                     </div>
