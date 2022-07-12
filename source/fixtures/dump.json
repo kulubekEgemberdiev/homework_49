@@ -3,8 +3,8 @@
     "model": "todolist.todolistmodel",
     "pk": 1,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 1,
         "type": 1,
         "created_date": "2022-07-08T07:21:55.115Z",
@@ -15,8 +15,8 @@
     "model": "todolist.todolistmodel",
     "pk": 2,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 2,
         "type": 2,
         "created_date": "2022-07-08T07:22:19.132Z",
@@ -27,8 +27,8 @@
     "model": "todolist.todolistmodel",
     "pk": 3,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 3,
         "type": 3,
         "created_date": "2022-07-08T07:22:41.443Z",
@@ -39,8 +39,8 @@
     "model": "todolist.todolistmodel",
     "pk": 4,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 1,
         "type": 2,
         "created_date": "2022-07-08T07:23:00.876Z",
@@ -51,8 +51,8 @@
     "model": "todolist.todolistmodel",
     "pk": 5,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 3,
         "type": 1,
         "created_date": "2022-07-08T07:23:17.131Z",
@@ -63,8 +63,8 @@
     "model": "todolist.todolistmodel",
     "pk": 6,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 2,
         "type": 3,
         "created_date": "2022-07-08T07:23:36.123Z",
@@ -75,8 +75,8 @@
     "model": "todolist.todolistmodel",
     "pk": 7,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 3,
         "type": 3,
         "created_date": "2022-07-08T07:23:54.130Z",
@@ -87,8 +87,8 @@
     "model": "todolist.todolistmodel",
     "pk": 8,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 2,
         "type": 1,
         "created_date": "2022-07-08T07:24:16.756Z",
@@ -99,8 +99,8 @@
     "model": "todolist.todolistmodel",
     "pk": 9,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 1,
         "type": 3,
         "created_date": "2022-07-08T07:24:32.779Z",
@@ -111,8 +111,8 @@
     "model": "todolist.todolistmodel",
     "pk": 10,
     "fields": {
-        "summary": "Задача",
-        "description": "Описание этой задачи",
+        "summary": "Todo",
+        "description": "Description of this todo",
         "status": 2,
         "type": 3,
         "created_date": "2022-07-08T07:24:53.287Z",
@@ -123,42 +123,42 @@
     "model": "todolist.types",
     "pk": 1,
     "fields": {
-        "type": "задача"
+        "type": "Task"
     }
 },
 {
     "model": "todolist.types",
     "pk": 2,
     "fields": {
-        "type": "ошибка"
+        "type": "Bug"
     }
 },
 {
     "model": "todolist.types",
     "pk": 3,
     "fields": {
-        "type": "улучшение"
+        "type": "Enhancement"
     }
 },
 {
     "model": "todolist.statuses",
     "pk": 1,
     "fields": {
-        "status": "новый"
+        "status": "New"
     }
 },
 {
     "model": "todolist.statuses",
     "pk": 2,
     "fields": {
-        "status": "в процессе"
+        "status": "In progress"
     }
 },
 {
     "model": "todolist.statuses",
     "pk": 3,
     "fields": {
-        "status": "выполнено"
+        "status": "Done"
     }
 }
 ]

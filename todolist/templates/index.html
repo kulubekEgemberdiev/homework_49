@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} Главная {% endblock %}
+{% block title %} Main {% endblock %}
 {% block nav %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'create' %}" title="Создать задачу">Создать задачу</a>
+        <a class="nav-link" href="{% url 'create' %}" title="Create new todo">Create</a>
     </li>
 {% endblock %}
 {% block search-block %}
     <form action="" method="get">
-    {% include "partial/forms.html" with button_text="Поиск" %}
+    {% include "partial/forms.html" with button_text="Search" %}
     </form>
 {% endblock %}
 
 {% block content %}
-    <h1>Список задач</h1>
+    <h1>Todo-List</h1>
     <div class="row">
         {% for some in todolist %}
                 <div class="col-12 col-md-6 col-lg-3 mb-4">
@@ -23,11 +23,11 @@
                             <h4 class="card-title text-dark">{{ some.summary }} №{{ some.id }}</h4>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-light"><b>Тип: </b>{{ some.type }}.</li>
-                            <li class="list-group-item bg-light"><b>Статус: </b>{{ some.status }}.</li>
+                            <li class="list-group-item bg-light"><b>Type: </b>{{ some.type }}.</li>
+                            <li class="list-group-item bg-light"><b>Status: </b>{{ some.status }}.</li>
                         </ul>
                         <div class="card-body bg-light">
-                            <a href="{% url 'detail' some.id %}" class="card-link" title="Подробнее"><span
+                            <a href="{% url 'detail' some.id %}" class="card-link" title="Detail view"><span
                                     class="material-symbols-outlined">visibility</span></a>
                         </div>
                     </div>
