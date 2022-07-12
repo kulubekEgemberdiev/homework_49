@@ -15,7 +15,7 @@
     <h1>Todo detail view.</h1><br><br>
     <h3>{{ todo.summary }} №{{ todo.id }}</h3>
     <p><b>Description:</b> {{ todo.description }}</p>
-    <p><b>Type:</b> {{ todo.type }}</p>
+    <p><b>Types:</b> {% for type in todo.type.all %}{{ type.type }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     <p><b>Status:</b> {{ todo.status }}</p>
     <p><b>Created date:</b> {{ todo.created_date|date:"Y-m-d H:i:s." }}</p>
     <p><b>Updated date:</b> {{ todo.updated_date|date:"Y-m-d H:i:s." }}</p>

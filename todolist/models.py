@@ -7,7 +7,7 @@ class TodolistModel(models.Model):
     summary = models.CharField(max_length=100, verbose_name="Summary")
     description = models.TextField(max_length=2000, null=True, blank=True, verbose_name="Description")
     status = models.ForeignKey("todolist.Statuses", on_delete=models.PROTECT, verbose_name="Status")
-    type = models.ForeignKey("todolist.Types", on_delete=models.PROTECT, verbose_name="Type")
+    type = models.ManyToManyField("todolist.Types", related_name="todolist", blank=True)
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Created date")
     updated_date = models.DateTimeField(auto_now=True, verbose_name="Updated date")
 

@@ -50,7 +50,8 @@ class CreateView(View):
             description = form.cleaned_data.get("description")
             type = form.cleaned_data.get("type")
             status = form.cleaned_data.get("status")
-            new_todo = TodolistModel.objects.create(summary=summary, description=description, type=type, status=status)
+            new_todo = TodolistModel.objects.create(summary=summary, description=description, status=status)
+            new_todo.type.set(type)
             return redirect("detail", pk=new_todo.pk)
         return render(request, "create.html", {"form": form})
 

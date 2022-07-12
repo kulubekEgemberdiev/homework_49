@@ -9,7 +9,7 @@
 {% endblock %}
 {% block search-block %}
     <form action="" method="get">
-    {% include "partial/forms.html" with button_text="Search" %}
+        {% include "partial/forms.html" with button_text="Search" %}
     </form>
 {% endblock %}
 
@@ -17,21 +17,24 @@
     <h1>Todo-List</h1>
     <div class="row">
         {% for some in todolist %}
-                <div class="col-12 col-md-6 col-lg-3 mb-4">
-                    <div class="card bg-light" style="width: 18rem;">
-                        <div class="card-body bg-light">
-                            <h4 class="card-title text-dark">{{ some.summary }} №{{ some.id }}</h4>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-light"><b>Type: </b>{{ some.type }}.</li>
-                            <li class="list-group-item bg-light"><b>Status: </b>{{ some.status }}.</li>
-                        </ul>
-                        <div class="card-body bg-light">
-                            <a href="{% url 'detail' some.id %}" class="card-link" title="Detail view"><span
-                                    class="material-symbols-outlined">visibility</span></a>
-                        </div>
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="card bg-light" style="width: 18rem;">
+                    <div class="card-body bg-light">
+                        <h4 class="card-title text-dark">{{ some.summary }} №{{ some.id }}</h4>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-light">
+                            <p><b>Types:</b> {% for type in some.type.all %}{{ type.type }}{% if not forloop.last %},
+                            {% endif %}{% endfor %}</p>
+                        </li>
+                        <li class="list-group-item bg-light"><b>Status: </b>{{ some.status }}.</li>
+                    </ul>
+                    <div class="card-body bg-light">
+                        <a href="{% url 'detail' some.id %}" class="card-link" title="Detail view"><span
+                                class="material-symbols-outlined">visibility</span></a>
                     </div>
                 </div>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}

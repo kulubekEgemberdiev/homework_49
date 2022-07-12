@@ -11,7 +11,7 @@ class TodoForm(forms.Form):
     summary = forms.CharField(max_length=100, label="Summary")
     description = forms.CharField(max_length=2000, required=False, label="Description",
                                   widget=widgets.Textarea(attrs={"cols": 50, "rows": 2}))
-    type = forms.ModelChoiceField(queryset=types.objects.all(), label="Type")
+    type = forms.ModelMultipleChoiceField(queryset=types.objects.all(), required=False, label='Teg')
     status = forms.ModelChoiceField(queryset=statuses.objects.all(), label="Status")
 
 
