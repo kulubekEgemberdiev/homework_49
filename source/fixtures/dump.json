@@ -207,10 +207,10 @@
     "pk": 16,
     "fields": {
         "summary": "Todo",
-        "description": "",
+        "description": "Decription of this todo",
         "status": 2,
         "created_date": "2022-07-14T18:57:38.820Z",
-        "updated_date": "2022-07-15T07:40:51.971Z",
+        "updated_date": "2022-07-15T08:37:04.843Z",
         "types": [
             13
         ]
@@ -282,7 +282,7 @@
         "description": "Description of this todo",
         "status": 2,
         "created_date": "2022-07-14T19:54:10.473Z",
-        "updated_date": "2022-07-14T19:54:10.473Z",
+        "updated_date": "2022-07-15T08:36:45.291Z",
         "types": [
             14
         ]
