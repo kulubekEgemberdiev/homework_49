@@ -24,8 +24,8 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item bg-light">
-                            <p><b>Types:</b> {% for type in some.type.all %}{{ type.type }}{% if not forloop.last %},
-                            {% endif %}{% endfor %}</p>
+                            <p><b>Types:</b> {% for type in some.types.all %}{{ type.types }}{% if not forloop.last %},
+                            {% endif %}{% empty %}<span class="text-warning">Types are not set.</span>{% endfor %}</p>
                         </li>
                         <li class="list-group-item bg-light"><b>Status: </b>{{ some.status }}.</li>
                     </ul>
@@ -35,6 +35,9 @@
                     </div>
                 </div>
             </div>
+        {% empty %}
+            <div class="not_found text-danger" style="position: relative; height: 400px">
+                <h2 style="position: absolute; top: 50%; left: 50%; margin: 0 -50% 0 0; transform: translate(-50%, -50%)">Todo with this number was not found!</h2>
         {% endfor %}
     </div>
 {% endblock %}

@@ -6,9 +6,12 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 1,
-        "type": 1,
         "created_date": "2022-07-08T07:21:55.115Z",
-        "updated_date": "2022-07-08T07:21:55.115Z"
+        "updated_date": "2022-07-13T07:34:40.539Z",
+        "types": [
+            13,
+            14
+        ]
     }
 },
 {
@@ -18,9 +21,11 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 2,
-        "type": 2,
         "created_date": "2022-07-08T07:22:19.132Z",
-        "updated_date": "2022-07-08T07:22:19.132Z"
+        "updated_date": "2022-07-13T07:34:59.859Z",
+        "types": [
+            14
+        ]
     }
 },
 {
@@ -30,9 +35,12 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 3,
-        "type": 3,
         "created_date": "2022-07-08T07:22:41.443Z",
-        "updated_date": "2022-07-08T07:22:41.443Z"
+        "updated_date": "2022-07-13T07:35:11.725Z",
+        "types": [
+            14,
+            15
+        ]
     }
 },
 {
@@ -42,9 +50,13 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 1,
-        "type": 2,
         "created_date": "2022-07-08T07:23:00.876Z",
-        "updated_date": "2022-07-08T07:23:00.876Z"
+        "updated_date": "2022-07-13T07:35:21.011Z",
+        "types": [
+            13,
+            14,
+            15
+        ]
     }
 },
 {
@@ -54,9 +66,11 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 3,
-        "type": 1,
         "created_date": "2022-07-08T07:23:17.131Z",
-        "updated_date": "2022-07-08T07:23:17.131Z"
+        "updated_date": "2022-07-13T07:35:25.291Z",
+        "types": [
+            15
+        ]
     }
 },
 {
@@ -66,9 +80,11 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 2,
-        "type": 3,
         "created_date": "2022-07-08T07:23:36.123Z",
-        "updated_date": "2022-07-08T07:23:36.123Z"
+        "updated_date": "2022-07-13T07:35:29.218Z",
+        "types": [
+            13
+        ]
     }
 },
 {
@@ -78,9 +94,11 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 3,
-        "type": 3,
         "created_date": "2022-07-08T07:23:54.130Z",
-        "updated_date": "2022-07-08T07:23:54.130Z"
+        "updated_date": "2022-07-13T07:35:32.659Z",
+        "types": [
+            13
+        ]
     }
 },
 {
@@ -90,9 +108,12 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 2,
-        "type": 1,
         "created_date": "2022-07-08T07:24:16.756Z",
-        "updated_date": "2022-07-08T07:24:16.756Z"
+        "updated_date": "2022-07-13T07:35:41.596Z",
+        "types": [
+            14,
+            15
+        ]
     }
 },
 {
@@ -102,9 +123,11 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 1,
-        "type": 3,
         "created_date": "2022-07-08T07:24:32.779Z",
-        "updated_date": "2022-07-08T07:24:32.779Z"
+        "updated_date": "2022-07-14T13:11:33.721Z",
+        "types": [
+            14
+        ]
     }
 },
 {
@@ -114,30 +137,176 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 2,
-        "type": 3,
         "created_date": "2022-07-08T07:24:53.287Z",
-        "updated_date": "2022-07-08T07:24:53.287Z"
+        "updated_date": "2022-07-12T12:34:27.969Z",
+        "types": [
+            14
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 11,
+    "fields": {
+        "summary": "Todo",
+        "description": "Description on this todo",
+        "status": 1,
+        "created_date": "2022-07-12T12:40:35.221Z",
+        "updated_date": "2022-07-12T12:40:35.221Z",
+        "types": [
+            14
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 13,
+    "fields": {
+        "summary": "Todo",
+        "description": "Description on this todo",
+        "status": 2,
+        "created_date": "2022-07-13T07:13:08.471Z",
+        "updated_date": "2022-07-13T07:13:08.471Z",
+        "types": [
+            14,
+            15
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 14,
+    "fields": {
+        "summary": "Todo",
+        "description": "Description on this todo",
+        "status": 1,
+        "created_date": "2022-07-14T18:17:07.307Z",
+        "updated_date": "2022-07-15T07:40:29.317Z",
+        "types": [
+            13,
+            15
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 15,
+    "fields": {
+        "summary": "Todo",
+        "description": "",
+        "status": 2,
+        "created_date": "2022-07-14T18:55:55.770Z",
+        "updated_date": "2022-07-15T07:40:45.420Z",
+        "types": [
+            14
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 16,
+    "fields": {
+        "summary": "Todo",
+        "description": "",
+        "status": 2,
+        "created_date": "2022-07-14T18:57:38.820Z",
+        "updated_date": "2022-07-15T07:40:51.971Z",
+        "types": [
+            13
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 17,
+    "fields": {
+        "summary": "Todo",
+        "description": "",
+        "status": 2,
+        "created_date": "2022-07-14T18:57:42.086Z",
+        "updated_date": "2022-07-15T07:40:58.595Z",
+        "types": [
+            14
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 18,
+    "fields": {
+        "summary": "Todo",
+        "description": "",
+        "status": 3,
+        "created_date": "2022-07-14T18:58:01.275Z",
+        "updated_date": "2022-07-15T07:41:16.159Z",
+        "types": [
+            13,
+            14,
+            15
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 19,
+    "fields": {
+        "summary": "Todo",
+        "description": "Description on this todo",
+        "status": 3,
+        "created_date": "2022-07-14T18:58:21.849Z",
+        "updated_date": "2022-07-14T18:58:21.849Z",
+        "types": [
+            13
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 20,
+    "fields": {
+        "summary": "Todo",
+        "description": null,
+        "status": 1,
+        "created_date": "2022-07-14T19:52:19.697Z",
+        "updated_date": "2022-07-14T19:52:19.697Z",
+        "types": [
+            13
+        ]
+    }
+},
+{
+    "model": "todolist.todolistmodel",
+    "pk": 21,
+    "fields": {
+        "summary": "Todo",
+        "description": "Description of this todo",
+        "status": 2,
+        "created_date": "2022-07-14T19:54:10.473Z",
+        "updated_date": "2022-07-14T19:54:10.473Z",
+        "types": [
+            14
+        ]
     }
 },
 {
     "model": "todolist.types",
-    "pk": 1,
+    "pk": 13,
     "fields": {
-        "type": "Task"
+        "types": "Enhancement"
     }
 },
 {
     "model": "todolist.types",
-    "pk": 2,
+    "pk": 14,
     "fields": {
-        "type": "Bug"
+        "types": "Task"
     }
 },
 {
     "model": "todolist.types",
-    "pk": 3,
+    "pk": 15,
     "fields": {
-        "type": "Enhancement"
+        "types": "Bug"
     }
 },
 {

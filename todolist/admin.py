@@ -1,8 +1,11 @@
 from django.contrib import admin
 
-
 # Register your models here.
 from todolist.models import TodolistModel, Statuses, Types
+
+
+class TypesAdminInline(admin.TabularInline):
+    model = TodolistModel.types.through
 
 
 class TodoAdmin(admin.ModelAdmin):
@@ -10,8 +13,9 @@ class TodoAdmin(admin.ModelAdmin):
     list_display_links = ['summary']
     list_filter = ['summary']
     search_fields = ['summary']
-    fields = ['summary', 'description', 'status', 'type', 'created_date', 'updated_date']
+    fields = ['summary', 'description', 'status', 'created_date', 'updated_date']
     readonly_fields = ['created_date', 'updated_date']
+    inlines = [TypesAdminInline]
 
 
 class StatusesAdmin(admin.ModelAdmin):
@@ -23,11 +27,7 @@ class StatusesAdmin(admin.ModelAdmin):
 
 
 class TypesAdmin(admin.ModelAdmin):
-    list_display = ['id', 'type']
-    list_display_links = ['type']
-    list_filter = ['type']
-    search_fields = ['type']
-    fields = ['type']
+    inlines = [TypesAdminInline]
 
 
 admin.site.register(TodolistModel, TodoAdmin)
