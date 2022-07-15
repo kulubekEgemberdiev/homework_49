@@ -2,9 +2,8 @@
 {% load static %}
 
 {% block title %}Create{% endblock %}
-
+{% block pagename %}Create new todo{% endblock %}
 {% block content %}
-    <h1>Create new todo</h1>
     <form action="" method="post">
     {% csrf_token %}
     {% include "partial/forms.html" with button_text="Create" %}

@@ -1,4 +1,4 @@
-from audioop import reverse
+from django.urls import reverse
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
@@ -58,64 +58,25 @@ class CreateView(View):
         return render(request, "create.html", {"form": form})
 
 
-class UpdateView(View):
+class UpdateView(FormView):
+    form_class = TodoForm
+    template_name = "update.html"
+
     def dispatch(self, request, *args, **kwargs):
-        pk = kwargs.get("pk")
-        self.todo = get_object_or_404(TodolistModel, pk=pk)
+        self.todo = self.get_object()
         return super().dispatch(request, *args, **kwargs)
 
-    def get(self, request, *args, **kwargs):
-        if request.method == "GET":
-            form = TodoForm(initial={
-                "summary": self.todo.summary,
-                "description": self.todo.description,
-                "types": self.todo.types,
-                "status": self.todo.status
-            })
-            return render(request, "update.html", {"form": form})
+    def get_success_url(self):
+        return reverse("detail", kwargs={"pk": self.todo.pk})
 
-    def post(self, request, *args, **kwargs):
-        form = TodoForm(data=request.POST)
-        if form.is_valid():
-            self.todo.summary = form.cleaned_data.get("summary")
-            self.todo.description = form.cleaned_data.get("description")
-            self.todo.types = form.cleaned_data.get("types")
-            self.todo.status = form.cleaned_data.get("status")
-            self.todo.save()
-            return redirect("detail", pk=self.todo.pk)
-        return render(request, "update.html", {"form": form})
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['instance'] = self.todo
+        return form_kwargs
 
-# class UpdateView(FormView):
-#     form_class = TodoForm
-#     template_name = "update.html"
-#
-#     def dispatch(self, request, *args, **kwargs):
-#         self.todo = self.get_object()
-#         return super().dispatch(request, *args, **kwargs)
-#
-#     def get_success_url(self):
-#         return reverse("article_view", kwargs={"pk": self.todo.pk})
-#
-#     # def get_initial(self):
-#     #     initial = {}
-#     #     for key in 'title', 'content', 'author':
-#     #         initial[key] = getattr(self.article, key)
-#     #     initial['tags'] = self.article.tags.all()
-#     #     return initial
-#     def get_form_kwargs(self):
-#         form_kwargs = super().get_form_kwargs()
-#         form_kwargs['instance'] = self.todo
-#         return form_kwargs
-#
-#     def form_valid(self, form):
-#         # tags = form.cleaned_data.pop('tags')
-#         # Article.objects.filter(pk=self.article.pk).update(**form.cleaned_data)
-#         # for key, value in form.cleaned_data.items():
-#         #     setattr(self.article, key, value)
-#         # self.article.save()
-#         # self.article.tags.set(tags)
-#         self.todo = form.save()
-#         return super().form_valid(form)
-#
-#     def get_object(self):
-#         return get_object_or_404(TodolistModel, pk=self.kwargs.get("pk"))
+    def form_valid(self, form):
+        self.todo = form.save()
+        return super().form_valid(form)
+
+    def get_object(self):
+        return get_object_or_404(TodolistModel, pk=self.kwargs.get("pk"))

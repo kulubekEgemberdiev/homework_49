@@ -11,11 +11,13 @@
         <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#DeleteTodo" title="Delete this todo">Delete</a>
     </li>
 {% endblock %}
+{% block pagename %}Todo detail view{% endblock %}
 {% block content %}
-    <h1>Todo detail view.</h1><br><br>
     <h3>{{ todo.summary }} №{{ todo.id }}</h3>
-    <p><b>Description:</b> {{ todo.description }}</p>
-    <p><b>Types:</b> {% for type in todo.types.all %}{{ type.types }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <p><b>Description:</b>{% if todo.description %} {{ todo.description }} {% else %}
+        <span style="color: rgb(224, 54, 2)"> Description has not been added yet. </span>{% endif %}</p>
+    <p><b>Types:</b> {% for type in todo.types.all %}{{ type.types }}{% if not forloop.last %}, {% endif %}{% endfor %}
+    </p>
     <p><b>Status:</b> {{ todo.status }}</p>
     <p><b>Created date:</b> {{ todo.created_date|date:"Y-m-d H:i:s." }}</p>
     <p><b>Updated date:</b> {{ todo.updated_date|date:"Y-m-d H:i:s." }}</p>
