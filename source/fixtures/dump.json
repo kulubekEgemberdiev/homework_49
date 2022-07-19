@@ -6,8 +6,8 @@
         "summary": "Todo",
         "description": "Description of this todo",
         "status": 1,
-        "created_date": "2022-07-08T07:21:55.115Z",
-        "updated_date": "2022-07-13T07:34:40.539Z",
+        "created_date": "2022-06-08T07:21:55.115Z",
+        "updated_date": "2022-06-13T07:34:40.539Z",
         "types": [
             13,
             14
@@ -65,9 +65,9 @@
     "fields": {
         "summary": "Todo",
         "description": "Description of this todo",
-        "status": 3,
-        "created_date": "2022-07-08T07:23:17.131Z",
-        "updated_date": "2022-07-13T07:35:25.291Z",
+        "status": 4,
+        "created_date": "2022-06-08T07:23:17.131Z",
+        "updated_date": "2022-06-18T07:35:25.291Z",
         "types": [
             15
         ]
@@ -107,9 +107,9 @@
     "fields": {
         "summary": "Todo",
         "description": "Description of this todo",
-        "status": 2,
-        "created_date": "2022-07-08T07:24:16.756Z",
-        "updated_date": "2022-07-13T07:35:41.596Z",
+        "status": 4,
+        "created_date": "2022-06-08T07:24:16.756Z",
+        "updated_date": "2022-06-18T07:35:41.596Z",
         "types": [
             14,
             15
@@ -136,7 +136,7 @@
     "fields": {
         "summary": "Todo",
         "description": "Description of this todo",
-        "status": 2,
+        "status": 4,
         "created_date": "2022-07-08T07:24:53.287Z",
         "updated_date": "2022-07-12T12:34:27.969Z",
         "types": [
@@ -148,7 +148,7 @@
     "model": "todolist.todolistmodel",
     "pk": 11,
     "fields": {
-        "summary": "Todo",
+        "summary": "Todo bug",
         "description": "Description on this todo",
         "status": 1,
         "created_date": "2022-07-12T12:40:35.221Z",
@@ -192,7 +192,7 @@
     "model": "todolist.todolistmodel",
     "pk": 15,
     "fields": {
-        "summary": "Todo",
+        "summary": "Bug todo",
         "description": "",
         "status": 2,
         "created_date": "2022-07-14T18:55:55.770Z",
@@ -220,7 +220,7 @@
     "model": "todolist.todolistmodel",
     "pk": 17,
     "fields": {
-        "summary": "Todo",
+        "summary": "Tobugdo",
         "description": "",
         "status": 2,
         "created_date": "2022-07-14T18:57:42.086Z",
@@ -328,6 +328,13 @@
     "pk": 3,
     "fields": {
         "status": "Done"
+    }
+},
+{
+    "model": "todolist.statuses",
+    "pk": 4,
+    "fields": {
+        "status": "Closed"
     }
 }
 ]
