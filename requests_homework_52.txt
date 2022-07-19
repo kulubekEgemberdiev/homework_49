@@ -1,0 +1,65 @@
+from todolist.models import TodolistModel as todolist, Statuses, Types
+from django.db.models import Q
+from django.utils import timezone
+from datetime import timedelta
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------#
+Закрытые задачи за последний месяц от текущей даты (вхождение определяйте
+по дате последнего обновления).
+
+q1 = Q(status__status="Closed")
+q2 = Q(updated_date__gt=(timezone.now()-timedelta(days=30))
+
+req = todolist.objects.filter((q1) & (q2))
+
+<QuerySet [<TodolistModel: 10. Todo. todolist.Types.None. Closed. 2022-07-08 07:24:53.287000+00:00. 2022-07-12 12:34:27.969000+00:00>]>
+
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------#
+Задачи, имеющие один из указанных статусов И один из указанных типов (в
+запросе укажите 2 любых названия типа и 2 названия статуса, которые есть в
+вашей базе).
+
+s1 = Q(status__status="New")
+s2 = Q(status__status="Done")
+t1 = Q(types__types="Enhancement")
+t2 = Q(types__types="Task")
+
+req = todolist.objects.filter((s1 | s2) & (t1 | t2))
+
+<QuerySet [<TodolistModel: 11. Todo bug. todolist.Types.None. New. 2022-07-12 12:40:35.221000+00:00. 2022-07-12 12:40:35.221000+00:00>, <TodolistMo
+del: 1. Todo. todolist.Types.None. New. 2022-06-08 07:21:55.115000+00:00. 2022-06-13 07:34:40.539000+00:00>, <TodolistModel: 1. Todo. todolist.Type
+s.None. New. 2022-06-08 07:21:55.115000+00:00. 2022-06-13 07:34:40.539000+00:00>, <TodolistModel: 3. Todo. todolist.Types.None. Done. 2022-07-08 07
+:22:41.443000+00:00. 2022-07-13 07:35:11.725000+00:00>, <TodolistModel: 4. Todo. todolist.Types.None. New. 2022-07-08 07:23:00.876000+00:00. 2022-0
+7-13 07:35:21.011000+00:00>, <TodolistModel: 4. Todo. todolist.Types.None. New. 2022-07-08 07:23:00.876000+00:00. 2022-07-13 07:35:21.011000+00:00>
+, <TodolistModel: 7. Todo. todolist.Types.None. Done. 2022-07-08 07:23:54.130000+00:00. 2022-07-13 07:35:32.659000+00:00>, <TodolistModel: 9. Todo.
+ todolist.Types.None. New. 2022-07-08 07:24:32.779000+00:00. 2022-07-14 13:11:33.721000+00:00>, <TodolistModel: 19. Todo. todolist.Types.None. Done
+. 2022-07-14 18:58:21.849000+00:00. 2022-07-14 18:58:21.849000+00:00>, <TodolistModel: 20. Todo. todolist.Types.None. New. 2022-07-14 19:52:19.6970
+00+00:00. 2022-07-14 19:52:19.697000+00:00>, <TodolistModel: 14. Todo. todolist.Types.None. New. 2022-07-14 18:17:07.307000+00:00. 2022-07-15 07:40
+:29.317000+00:00>, <TodolistModel: 18. Todo. todolist.Types.None. Done. 2022-07-14 18:58:01.275000+00:00. 2022-07-15 07:41:16.159000+00:00>, <Todol
+istModel: 18. Todo. todolist.Types.None. Done. 2022-07-14 18:58:01.275000+00:00. 2022-07-15 07:41:16.159000+00:00>]>
+
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------#
+Задачи, в названии которых содержится слово "bug" в любом регистре или
+относящиеся к типу "Баг", имеющие НЕ закрытый статус.
+
+q1 = Q(summary__icontains="bug")
+q2 = Q(types__types="Bug")
+q3 = ~Q(status__status="Closed")
+
+req = todolist.objects.filter((q1 | q2) & (q3))
+
+<QuerySet [<TodolistModel: 3. Todo. todolist.Types.None. Done. 2022-07-08 07:22:41.443000+00:00. 2022-07-13 07:35:11.725000+00:00>, <TodolistModel:
+ 4. Todo. todolist.Types.None. New. 2022-07-08 07:23:00.876000+00:00. 2022-07-13 07:35:21.011000+00:00>, <TodolistModel: 11. Todo bug. todolist.Typ
+es.None. New. 2022-07-12 12:40:35.221000+00:00. 2022-07-12 12:40:35.221000+00:00>, <TodolistModel: 13. Todo. todolist.Types.None. In progress. 2022
+-07-13 07:13:08.471000+00:00. 2022-07-13 07:13:08.471000+00:00>, <TodolistModel: 14. Todo. todolist.Types.None. New. 2022-07-14 18:17:07.307000+00:
+00. 2022-07-15 07:40:29.317000+00:00>, <TodolistModel: 15. Bug todo. todolist.Types.None. In progress. 2022-07-14 18:55:55.770000+00:00. 2022-07-15
+ 07:40:45.420000+00:00>, <TodolistModel: 17. Tobugdo. todolist.Types.None. In progress. 2022-07-14 18:57:42.086000+00:00. 2022-07-15 07:40:58.59500
+0+00:00>, <TodolistModel: 18. Todo. todolist.Types.None. Done. 2022-07-14 18:58:01.275000+00:00. 2022-07-15 07:41:16.159000+00:00>]>
+
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+
