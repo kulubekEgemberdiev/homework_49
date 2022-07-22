@@ -8,40 +8,39 @@
     </li>
 {% endblock %}
 {% block search-block %}
-    <form action="" method="get">
-        {% include "partial/forms.html" with button_text="Search" %}
-    </form>
+{% include "partial/search_form.html" %}
 {% endblock %}
 
 {% block pagename %}Todo-List{% endblock %}
 {% block content %}
     <div class="row">
-        {% for some in todolist %}
-            <div class="col-12 col-md-6 col-lg-3 mb-4">
-                <div class="card bg-light" style="width: 18rem;">
-                    <div class="card-body bg-light">
-                        <h4 class="card-title text-dark">{{ some.summary }}</h4>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-light">
-                            <p><b>Types:</b> {% for type in some.types.all %}{{ type.types }}{% if not forloop.last %},
-                            {% endif %}{% empty %}<span class="text-warning">Types are not set.</span>{% endfor %}</p>
-                        </li>
-                        <li class="list-group-item bg-light"><b>Status: </b>{{ some.status }}.</li>
-                    </ul>
-                    <div class="card-body bg-light">
-                        <a href="{% url 'detail' some.id %}" class="card-link" title="Detail view"><span
-                                class="material-symbols-outlined">visibility</span></a>
-                    </div>
+    {% for some in todolist %}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+            <div class="card bg-light" style="width: 18rem;">
+                <div class="card-body bg-light">
+                    <h4 class="card-title text-dark">{{ some.summary }}</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-light">
+                        <p><b>Types:</b> {% for type in some.types.all %}{{ type.types }}{% if not forloop.last %},
+                        {% endif %}{% empty %}<span class="text-warning">Types are not set.</span>{% endfor %}</p>
+                    </li>
+                    <li class="list-group-item bg-light"><b>Status: </b>{{ some.status }}.</li>
+                </ul>
+                <div class="card-body bg-light">
+                    <a href="{% url 'detail' some.id %}" class="card-link" title="Detail view"><span
+                            class="material-symbols-outlined">visibility</span></a>
                 </div>
             </div>
-        {% empty %}
-            <div class="not_found text-danger" style="position: relative; height: 400px">
-                <h2 style="position: absolute; top: 50%; left: 50%; margin: 0 -50% 0 0; transform: translate(-50%, -50%)">Todo with this number was not found!</h2>
-        {% endfor %}
+        </div>
+    {% empty %}
+        <div class="not_found text-danger" style="position: relative; height: 400px">
+        <h2 style="position: absolute; top: 50%; left: 50%; margin: 0 -50% 0 0; transform: translate(-50%, -50%)">Todo
+            with this number was not found!</h2>
+    {% endfor %}
+</div>
     {% if is_paginated %}
         {% include "partial/pagination.html" %}
     {% endif %}
-    </div>
 {% endblock %}
 

@@ -1,25 +1,51 @@
+from django.db.models import Q
 from django.urls import reverse
 
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.http import urlencode
 from django.views import View
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, ListView
 
 # Create your views here.
 from todolist.form import TodoForm, SearchForm
 from todolist.models import TodolistModel
 
 
-class Index(TemplateView):
+class Index(ListView):
+    model = TodolistModel
+    template_name = "index.html"
+    context_object_name = "todolist"
+    ordering = "-updated_date"
+    paginate_by = 10
+    paginate_orphans = 2
+
     def get(self, request, *args, **kwargs):
-        search_form = SearchForm(data=request.GET)
-        todolist = TodolistModel.objects.all()
-        if search_form.is_valid():
-            search = search_form.cleaned_data.get("search_field")
-            if search:
-                todolist = todolist.filter(id__contains=search)
-        todolist = todolist.order_by("-created_date")
-        context = {"todolist": todolist, "form": search_form}
-        return render(request, "index.html", context)
+        self.form = self.get_search_form()
+        self.search_value = self.get_search_value()
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context["form"] = self.form
+        if self.search_value:
+            context["query"] = urlencode({"search": self.search_value})
+            context["search"] = self.search_value
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.search_value:
+            query = Q(summary__icontains=self.search_value) | Q(description__icontains=self.search_value)
+            queryset = queryset.filter(query)
+        return queryset
+
+    def get_search_form(self):
+        return SearchForm(self.request.GET)
+
+    def get_search_value(self):
+        if self.form.is_valid():
+            return self.form.cleaned_data["search"]
+        return None
 
 
 class DetailView(TemplateView):

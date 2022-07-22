@@ -36,4 +36,4 @@ class TodoForm(forms.ModelForm):
 
 
 class SearchForm(forms.Form):
-    search_field = forms.CharField(max_length=50, required=False, label="Search by todo number")
+    search = forms.CharField(max_length=50, required=False, label="Search")

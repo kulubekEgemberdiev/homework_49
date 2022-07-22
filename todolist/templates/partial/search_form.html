@@ -1,0 +1,10 @@
+<form class="text-center" action="" method="GET">
+    <label for="{{ form.search.id_for_label }}">{{ form.search.label }}:</label>
+    {{ form.search }}
+    <button type="submit" class="btn" title="Search" style="width: 50px; height: 40px; padding-left: 5px">
+        <span class="material-symbols-outlined" style="font-size: 20px">search</span>
+    </button>
+    {% for error in form.search.errors %}
+        <p class="form-error">{{ error }}</p>
+    {% endfor %}
+</form>
