@@ -1,10 +1,12 @@
 <div class="pagination">
 <span class="step-links">
-<a href="?page=1">&laquo; Start</a>
+<a href="?page=1" title="Go to start"><span class="material-symbols-outlined">first_page</span></a>
     {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number}}">Previous</a>
+        <a href="?page={{ page_obj.previous_page_number }}" title="Previous page"><span class="material-symbols-outlined">
+navigate_before</span></a>
     {% else %}
-        <span class="page-disabled">Previous</span>
+        <span class="page-disabled"><span class="material-symbols-outlined">
+navigate_before</span></span>
     {% endif %}
     <form class="current-page" method="get">
 <label for="page">Page<input type="text" name="page" id="page" value="{{ page_obj.number }}">
@@ -12,11 +14,13 @@ of {{ page_obj.paginator.num_pages }}.
 </label>
 </form>
     {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number}}">Next</a>
+        <a href="?page={{ page_obj.next_page_number }}" title="Next page"><span class="material-symbols-outlined">
+navigate_next</span></a>
     {% else %}
-        <span class="page-disabled">Next</span>
+        <span class="page-disabled"><span class="material-symbols-outlined">
+navigate_next</span></span>
     {% endif %}
-    <a href="?page={{ page_obj.paginator.num_pages }}">End
-&raquo;</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}" title="Go to the end"><span class="material-symbols-outlined">
+    last_page</span></a>
 </span>
 </div>
