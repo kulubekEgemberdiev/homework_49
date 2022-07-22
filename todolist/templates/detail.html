@@ -13,7 +13,7 @@
 {% endblock %}
 {% block pagename %}Todo detail view{% endblock %}
 {% block content %}
-    <h3>{{ todo.summary }} №{{ todo.id }}</h3>
+    <h3>{{ todo.summary }}</h3>
     <p><b>Description:</b>{% if todo.description %} {{ todo.description }} {% else %}
         <span style="color: rgb(224, 54, 2)"> Description has not been added yet. </span>{% endif %}</p>
     <p><b>Types:</b> {% for type in todo.types.all %}{{ type.types }}{% if not forloop.last %}, {% endif %}{% endfor %}
