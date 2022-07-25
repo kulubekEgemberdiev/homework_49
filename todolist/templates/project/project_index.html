@@ -21,11 +21,6 @@
                     <h4 class="card-title text-dark">{{ project.name }}</h4>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item bg-light">
-                        <p><b>Todolist:</b>
-                            {% for todo in project.todolist.all %}{{ todo.summary }}{% if not forloop.last %},
-                            {% endif %}{% empty %}<span class="text-danger">Tasks not found.</span>{% endfor %}</p>
-                    </li>
                     <li class="list-group-item bg-light"><b>Start date: </b>{{ project.start_date|date:"Y-m-d" }}.</li>
                     <li class="list-group-item bg-light"><b>End
                         date: </b>{% if project.end_date %}{{ project.end_date|date:"Y-m-d" }}. {% else %}
