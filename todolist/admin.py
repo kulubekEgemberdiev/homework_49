@@ -9,11 +9,11 @@ class TypesAdminInline(admin.TabularInline):
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'description', 'beginning_date', 'expiration_date']
+    list_display = ['id', 'name', 'description', 'start_date', 'end_date']
     list_display_links = ['name']
     list_filter = ['name']
     search_fields = ['name']
-    fields = ['name', 'description', 'beginning_date', 'expiration_date']
+    fields = ['name', 'description', 'start_date', 'end_date']
 
 
 class TodoAdmin(admin.ModelAdmin):
