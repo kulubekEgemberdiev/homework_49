@@ -1,7 +1,7 @@
 from django.urls import path
 
 from todolist.views.todolist_views import Index, DetailView, DeleteView, CreateView, UpdateView
-from todolist.views.project_views import ProjectIndex
+from todolist.views.project_views import ProjectIndex, ProjectDetailView
 
 urlpatterns = [
     path("todolist/", Index.as_view(), name="index"),
@@ -9,5 +9,6 @@ urlpatterns = [
     path("todolist/<int:pk>/delete/", DeleteView.as_view(), name="delete"),
     path("todolist/<int:pk>/update/", UpdateView.as_view(), name="update"),
     path("todolist/create/new/", CreateView.as_view(), name="create"),
-    path("", ProjectIndex.as_view(), name="project_index")
+    path("", ProjectIndex.as_view(), name="project_index"),
+    path("projects/<int:pk>/detail/", ProjectDetailView.as_view(), name="project_detail")
 ]

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Detail{% endblock %}
+{% block nav %}
+    <li class="nav-item">
+        <a href="#" class="nav-link" title="Create new project">Create</a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link" title="Update project">Update</a>
+    </li>
+    <li class="nav-item">
+        <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#DeleteProject" title="Delete this project">Delete</a>
+    </li>
+{% endblock %}
+{% block pagename %}Project detail view{% endblock %}
+{% block content %}
+    <h3>{{ projects.name }}</h3>
+    <p><b>Description:</b>{% if todo.description %} {{ todo.description }} {% else %}
+        <span style="color: rgb(224, 54, 2)"> Description has not been added yet. </span>{% endif %}</p>
+    <p><b>Start date:</b> {{ projects.start_date|date:"Y-m-d" }}</p>
+    <p><b>End date:</b> {{ projects.end_date|date:"Y-m-d" }}</p>
+    <h4 class="todo-title" style="text-transform: uppercase; color: rgb(40, 40, 40); font-family: 'Maiandra GD'; font-size: 50px; margin-top: 50px; margin-bottom: 20px;">Todo-List</h4>
+    <ul style="list-style-type: square">
+    {% for todo in projects.todolist.all %}
+        <li><a href="{% url 'detail' todo.id %}" style="text-decoration: none; color: black" title="Task Detail View">{{ todo.summary }}</a></li>
+        {% empty %}
+        <strong><p class="text-danger">There is no tasks!</p></strong>
+    {% endfor %}
+    </ul>
+
+    {#    ---------------------------------------------------------------#}
+    <div class="modal" tabindex="-1" id="DeleteProject">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="DeleteProject">Delete</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete "{{ projects.name }}"?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No</button>
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,7 +1,7 @@
 from django.db.models import Q
 
 from django.utils.http import urlencode
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
 from todolist.form import SearchForm
@@ -43,4 +43,15 @@ class ProjectIndex(ListView):
         if self.form.is_valid():
             return self.form.cleaned_data["search"]
         return None
+
+
+class ProjectDetailView(DetailView):
+    template_name = "project/project_detail.html"
+    model = ProjectModel
+    context_object_name = "projects"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['todolist'] = self.object.todolist.order_by("-updated_date")
+        return context
 

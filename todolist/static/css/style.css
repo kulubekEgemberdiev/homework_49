@@ -65,3 +65,12 @@ footer {
     left: 0;
     min-width: 100%;
 }
+
+.todo-title {
+    text-transform: uppercase;
+    color: rgb(40, 40, 40);
+    font-family: "Maiandra GD";
+    font-size: 50px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}

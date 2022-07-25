@@ -24,6 +24,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="{% url 'index' %}" class="nav-link" title="Go to todolist">Todolist</a>
+                </li>
                 {% block nav %}{% endblock %}
             </ul>
             {% block search-block %}{% endblock %}
