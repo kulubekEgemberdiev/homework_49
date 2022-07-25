@@ -8,11 +8,11 @@ from django.db import models
 class ProjectModel(models.Model):
     name = models.CharField(max_length=30, verbose_name="Name")
     description = models.TextField(max_length=2000, null=True, blank=True, verbose_name="Description")
-    beginning_date = models.DateField(verbose_name="Beginning date")
-    expiration_date = models.DateField(null=True, blank=True, verbose_name="Expiration date")
+    start_date = models.DateField(verbose_name="Start date")
+    end_date = models.DateField(null=True, blank=True, verbose_name="End date")
 
     def __str__(self):
-        return f"{self.id}. {self.name}. {self.beginning_date}. {self.expiration_date}."
+        return f"{self.id}. {self.name}. {self.start_date}. {self.end_date}."
 
     class Meta:
         db_table = "project"
