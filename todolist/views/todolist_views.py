@@ -13,7 +13,7 @@ from todolist.models import TodolistModel
 
 class Index(ListView):
     model = TodolistModel
-    template_name = "index.html"
+    template_name = "todolist/index.html"
     context_object_name = "todolist"
     ordering = "-updated_date"
     paginate_by = 10
@@ -49,7 +49,7 @@ class Index(ListView):
 
 
 class DetailView(TemplateView):
-    template_name = "detail.html"
+    template_name = "todolist/detail.html"
 
     def get_context_data(self, **kwargs):
         pk = kwargs.get("pk")
@@ -69,7 +69,7 @@ class DeleteView(View):
 class CreateView(View):
     def get(self, request, *args, **kwargs):
         form = TodoForm()
-        return render(request, "create.html", {"form": form})
+        return render(request, "todolist/create.html", {"form": form})
 
     def post(self, request, *args, **kwargs):
         form = TodoForm(data=request.POST)
@@ -81,12 +81,12 @@ class CreateView(View):
             new_todo = TodolistModel.objects.create(summary=summary, description=description, status=status)
             new_todo.types.set(types)
             return redirect("detail", pk=new_todo.pk)
-        return render(request, "create.html", {"form": form})
+        return render(request, "todolist/create.html", {"form": form})
 
 
 class UpdateView(FormView):
     form_class = TodoForm
-    template_name = "update.html"
+    template_name = "todolist/update.html"
 
     def dispatch(self, request, *args, **kwargs):
         self.todo = self.get_object()

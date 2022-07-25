@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Update{% endblock %}
+{% block pagename %}Update Todo{% endblock %}
+{% block content %}
+    <form action="" method="post">
+    {% csrf_token %}
+    {% include "partial/forms.html" with button_text="Apply" %}
+    </form>
+
+{% endblock %}
