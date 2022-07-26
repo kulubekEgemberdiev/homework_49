@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView
 
 # Create your views here.
 from todolist.form import SearchForm, ProjectForm
-from todolist.models import ProjectModel, TodolistModel
+from todolist.models import ProjectModel
 
 
 class ProjectIndexView(ListView):
@@ -16,7 +16,7 @@ class ProjectIndexView(ListView):
     context_object_name = "projects"
     ordering = "-id"
     paginate_by = 8
-    paginate_orphans = 2
+    paginate_orphans = 1
 
     def get(self, request, *args, **kwargs):
         self.form = self.get_search_form()

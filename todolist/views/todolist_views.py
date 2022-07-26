@@ -4,11 +4,11 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.http import urlencode
 from django.views import View
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import TemplateView, FormView, ListView, CreateView
 
 # Create your views here.
 from todolist.form import TodoForm, SearchForm
-from todolist.models import TodolistModel
+from todolist.models import TodolistModel, ProjectModel
 
 
 class Index(ListView):
@@ -66,22 +66,17 @@ class DeleteView(View):
         return redirect("index")
 
 
-class CreateView(View):
-    def get(self, request, *args, **kwargs):
-        form = TodoForm()
-        return render(request, "todolist/create.html", {"form": form})
+class CreateView(CreateView):
+    form_class = TodoForm
+    template_name = "todolist/create.html"
 
-    def post(self, request, *args, **kwargs):
-        form = TodoForm(data=request.POST)
-        if form.is_valid():
-            summary = form.cleaned_data.get("summary")
-            description = form.cleaned_data.get("description")
-            types = form.cleaned_data.get("types")
-            status = form.cleaned_data.get("status")
-            new_todo = TodolistModel.objects.create(summary=summary, description=description, status=status)
-            new_todo.types.set(types)
-            return redirect("detail", pk=new_todo.pk)
-        return render(request, "todolist/create.html", {"form": form})
+    def form_valid(self, form):
+        project = get_object_or_404(ProjectModel, pk=self.kwargs.get("pk"))
+        form.instance.project = project
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("project_detail", kwargs={"pk": self.object.project.pk})
 
 
 class UpdateView(FormView):

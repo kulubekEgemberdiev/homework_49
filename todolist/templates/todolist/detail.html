@@ -2,9 +2,6 @@
 {% block title %}Detail{% endblock %}
 {% block nav %}
     <li class="nav-item">
-        <a href="{% url 'create' %}" class="nav-link" title="Create new todo">Create</a>
-    </li>
-    <li class="nav-item">
         <a href="{% url 'update' todo.id %}" class="nav-link" title="Update todo">Update</a>
     </li>
     <li class="nav-item">

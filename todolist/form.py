@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import widgets
 
-from todolist.models import TodolistModel
+from todolist.models import TodolistModel, ProjectModel
 
 
 class TodoForm(forms.ModelForm):
@@ -37,3 +37,14 @@ class TodoForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=50, required=False, label="Search")
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = ProjectModel
+        fields = ['name', 'description', 'start_date', 'end_date']
+        widgets = {
+            "description": widgets.Textarea(attrs={"cols": 50, "rows": 2}),
+            "start_date": widgets.SelectDateWidget,
+            "end_date": widgets.SelectDateWidget,
+        }

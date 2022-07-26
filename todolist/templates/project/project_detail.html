@@ -14,7 +14,7 @@
 {% block pagename %}Project detail view{% endblock %}
 {% block content %}
     <h3>{{ projects.name }}</h3>
-    <p><b>Description:</b>{% if todo.description %} {{ todo.description }} {% else %}
+    <p><b>Description:</b>{% if projects.description %} {{ projects.description }} {% else %}
         <span style="color: rgb(224, 54, 2)"> Description has not been added yet. </span>{% endif %}</p>
     <p><b>Start date:</b> {{ projects.start_date|date:"Y-m-d" }}</p>
     <p><b>End date:</b> {{ projects.end_date|date:"Y-m-d" }}</p>
@@ -25,6 +25,7 @@
         {% empty %}
         <strong><p class="text-danger">There is no tasks!</p></strong>
     {% endfor %}
+        <a type="button" class="btn btn-secondary mt-5" href="{% url 'create' projects.id%}">Add new task.</a>
     </ul>
 
     {#    ---------------------------------------------------------------#}
