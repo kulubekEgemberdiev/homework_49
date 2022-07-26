@@ -1,14 +1,16 @@
 from django.db.models import Q
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
 
 from django.utils.http import urlencode
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 # Create your views here.
-from todolist.form import SearchForm
-from todolist.models import TodolistModel, ProjectModel
+from todolist.form import SearchForm, ProjectForm
+from todolist.models import ProjectModel, TodolistModel
 
 
-class ProjectIndex(ListView):
+class ProjectIndexView(ListView):
     model = ProjectModel
     template_name = "project/project_index.html"
     context_object_name = "projects"
@@ -55,3 +57,13 @@ class ProjectDetailView(DetailView):
         context['todolist'] = self.object.todolist.order_by("-updated_date")
         return context
 
+
+class ProjectCreateView(CreateView):
+    form_class = ProjectForm
+    template_name = "project/project_create.html"
+
+    def form_valid(self, form):
+        project = form.save(commit=False)
+        project.save()
+        form.save_m2m()
+        return redirect("project_detail", pk=project.pk)
