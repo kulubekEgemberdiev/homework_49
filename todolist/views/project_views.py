@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 
 from django.utils.http import urlencode
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 # Create your views here.
 from todolist.form import SearchForm, ProjectForm
@@ -67,3 +67,13 @@ class ProjectCreateView(CreateView):
         project.save()
         form.save_m2m()
         return redirect("project_detail", pk=project.pk)
+
+
+class ProjectUpdateView(UpdateView):
+    model = ProjectModel
+    template_name = "project/project_update.html"
+    form_class = ProjectForm
+    context_object_name = "projects"
+
+    def get_success_url(self):
+        return reverse("project_detail", kwargs={"pk": self.object.pk})

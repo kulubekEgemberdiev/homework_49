@@ -8,5 +8,5 @@
     {% csrf_token %}
     {% include "partial/forms.html" with button_text="Create" %}
     </form>
-
+<a href="{% url 'project_index' %}" type="button" class="btn btn-danger mt-2" style="width: 120px">Cancel</a>
 {% endblock %}

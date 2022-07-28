@@ -5,7 +5,7 @@
         <a href="{% url 'project_create' %}" class="nav-link" title="Create new project">Create</a>
     </li>
     <li class="nav-item">
-        <a href="#" class="nav-link" title="Update project">Update</a>
+        <a href="{% url 'project_update' projects.id %}" class="nav-link" title="Update project">Update</a>
     </li>
     <li class="nav-item">
         <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#DeleteProject" title="Delete this project">Delete</a>
@@ -27,4 +27,5 @@
     {% endfor %}
         <a type="button" class="btn btn-secondary mt-5" href="{% url 'create' projects.id%}">Add new task.</a>
     </ul>
+{% endblock %}
 
