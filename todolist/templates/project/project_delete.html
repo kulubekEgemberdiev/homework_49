@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Delete project{% endblock %}
+{% block pagename %}Delete project{% endblock %}
+{% block content %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+            <h2>Are you sure you want to delete "{{ projects.name }}"?</h2>
+            <a href="{% url 'project_detail' projects.id %}" type="button" class="btn btn-danger mt-2"
+               style="width: 120px" title="Cancel deletion.">Cancel</a>
+            <button type="submit" class="btn btn-success" style="width: 120px" title="Delete this project.">Delete</button>
+    </form>
+{% endblock %}

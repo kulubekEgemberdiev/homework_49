@@ -1,9 +1,9 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from django.utils.http import urlencode
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
 from todolist.form import SearchForm, ProjectForm
@@ -77,3 +77,10 @@ class ProjectUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse("project_detail", kwargs={"pk": self.object.pk})
+
+
+class ProjectDeleteView(DeleteView):
+    template_name = "project/project_delete.html"
+    model = ProjectModel
+    context_object_name = 'projects'
+    success_url = reverse_lazy('project_index')
