@@ -26,15 +26,19 @@
             <li style="margin-top: 15px"><a href="{% url 'detail' todo.id %}"
                                             style="text-decoration: none; color: black"
                                             title="Task Detail View">{{ todo.summary }}</a>
+
+                <a href="{% url 'detail' todo.id %}" title="Task detail view."
+                   style="width: 40px; height: 35px; text-decoration: none">
+                    <span class="material-symbols-outlined" style="font-size: 25px; color: rgb(40, 30, 255);
+                        margin: 0 15px;">
+                        visibility
+                    </span>
+                </a>
                 <a href="{% url 'update' todo.id %}" title="Update this task."
                    style="width: 40px; height: 35px; text-decoration: none">
-                    <span class="material-symbols-outlined" style="font-size: 25px; color: rgb(4, 210, 20);
-                        margin: 0 15px;">edit</span>
-                </a>
-                <a href="{% url 'delete' todo.id %}" title="Delete this task."
-                   style="width: 40px; height: 35px; text-decoration: none">
-                    <span class="material-symbols-outlined" style="font-size: 25px; color: rgb(250, 15, 5);">
-                        delete</span>
+                    <span class="material-symbols-outlined" style="font-size: 25px; color: rgb(4, 210, 20);">
+                        edit
+                    </span>
                 </a>
             </li>
         {% empty %}
