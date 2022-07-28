@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.http import urlencode
 from django.views import View
-from django.views.generic import TemplateView, FormView, ListView, CreateView
+from django.views.generic import TemplateView, FormView, ListView, CreateView, UpdateView
 
 # Create your views here.
 from todolist.form import TodoForm, SearchForm
@@ -15,7 +15,7 @@ class Index(ListView):
     model = TodolistModel
     template_name = "todolist/index.html"
     context_object_name = "todolist"
-    ordering = "-updated_date"
+    ordering = "-id"
     paginate_by = 10
     paginate_orphans = 2
 
@@ -79,25 +79,10 @@ class CreateView(CreateView):
         return reverse("project_detail", kwargs={"pk": self.object.project.pk})
 
 
-class UpdateView(FormView):
-    form_class = TodoForm
+class UpdateView(UpdateView):
+    model = TodolistModel
     template_name = "todolist/update.html"
-
-    def dispatch(self, request, *args, **kwargs):
-        self.todo = self.get_object()
-        return super().dispatch(request, *args, **kwargs)
+    form_class = TodoForm
 
     def get_success_url(self):
-        return reverse("detail", kwargs={"pk": self.todo.pk})
-
-    def get_form_kwargs(self):
-        form_kwargs = super().get_form_kwargs()
-        form_kwargs['instance'] = self.todo
-        return form_kwargs
-
-    def form_valid(self, form):
-        self.todo = form.save()
-        return super().form_valid(form)
-
-    def get_object(self):
-        return get_object_or_404(TodolistModel, pk=self.kwargs.get("pk"))
+        return reverse("detail", kwargs={"pk": self.object.pk})

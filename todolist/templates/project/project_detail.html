@@ -8,7 +8,8 @@
         <a href="{% url 'project_update' projects.id %}" class="nav-link" title="Update project">Update</a>
     </li>
     <li class="nav-item">
-        <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#DeleteProject" title="Delete this project">Delete</a>
+        <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#DeleteProject"
+           title="Delete this project">Delete</a>
     </li>
 {% endblock %}
 {% block pagename %}Project detail view{% endblock %}
@@ -18,14 +19,29 @@
         <span style="color: rgb(224, 54, 2)"> Description has not been added yet. </span>{% endif %}</p>
     <p><b>Start date:</b> {{ projects.start_date|date:"Y-m-d" }}</p>
     <p><b>End date:</b> {{ projects.end_date|date:"Y-m-d" }}</p>
-    <h4 class="todo-title" style="text-transform: uppercase; color: rgb(40, 40, 40); font-family: 'Maiandra GD'; font-size: 50px; margin-top: 50px; margin-bottom: 20px;">Todo-List</h4>
+    <h4 class="todo-title"
+        style="text-transform: uppercase; color: rgb(40, 40, 40); font-family: 'Maiandra GD'; font-size: 50px; margin-top: 50px; margin-bottom: 20px;">
+        Todo-List</h4>
     <ul style="list-style-type: square">
-    {% for todo in projects.todolist.all %}
-        <li><a href="{% url 'detail' todo.id %}" style="text-decoration: none; color: black" title="Task Detail View">{{ todo.summary }}</a></li>
+        {% for todo in projects.todolist.all %}
+            <li style="margin-top: 15px"><a href="{% url 'detail' todo.id %}"
+                                            style="text-decoration: none; color: black"
+                                            title="Task Detail View">{{ todo.summary }}</a>
+                <a href="{% url 'update' todo.id %}" title="Update this task."
+                   style="width: 40px; height: 35px; text-decoration: none">
+                    <span class="material-symbols-outlined" style="font-size: 25px; color: rgb(4, 210, 20);
+                        margin: 0 15px;">edit</span>
+                </a>
+                <a href="{% url 'delete' todo.id %}" title="Delete this task."
+                   style="width: 40px; height: 35px; text-decoration: none">
+                    <span class="material-symbols-outlined" style="font-size: 25px; color: rgb(250, 15, 5);">
+                        delete</span>
+                </a>
+            </li>
         {% empty %}
-        <strong><p class="text-danger">There is no tasks!</p></strong>
-    {% endfor %}
-        <a type="button" class="btn btn-secondary mt-5" href="{% url 'create' projects.id%}">Add new task.</a>
+            <strong><p class="text-danger">There is no tasks!</p></strong>
+        {% endfor %}
+        <a type="button" class="btn btn-secondary mt-5" href="{% url 'create' projects.id %}">Add new task.</a>
     </ul>
 {% endblock %}
 
