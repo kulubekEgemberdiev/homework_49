@@ -1,10 +1,10 @@
 from django.db.models import Q
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.http import urlencode
 from django.views import View
-from django.views.generic import TemplateView, FormView, ListView, CreateView, UpdateView
+from django.views.generic import TemplateView, FormView, ListView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
 from todolist.form import TodoForm, SearchForm
@@ -58,12 +58,11 @@ class DetailView(TemplateView):
         return super().get_context_data(**kwargs)
 
 
-class DeleteView(View):
-    def post(self, request, *args, **kwargs):
-        pk = kwargs.get("pk")
-        todo = get_object_or_404(TodolistModel, pk=pk)
-        todo.delete()
-        return redirect("index")
+class DeleteView(DeleteView):
+    template_name = "todolist/delete.html"
+    model = TodolistModel
+    context_object_name = 'todolist'
+    success_url = reverse_lazy('project_index')
 
 
 class CreateView(CreateView):

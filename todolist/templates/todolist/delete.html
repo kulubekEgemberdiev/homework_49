@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Delete todo{% endblock %}
+{% block pagename %}Delete todo{% endblock %}
+{% block content %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+            <h2>Are you sure you want to delete "{{ todolist.summary }}"?</h2>
+            <a href="{% url 'project_index' %}" type="button" class="btn btn-danger mt-2"
+               style="width: 120px" title="Cancel deletion.">Cancel</a>
+            <button type="submit" class="btn btn-success" style="width: 120px" title="Delete this project.">Delete</button>
+    </form>
+{% endblock %}

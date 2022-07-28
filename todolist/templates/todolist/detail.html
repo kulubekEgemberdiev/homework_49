@@ -4,6 +4,9 @@
     <li class="nav-item">
         <a href="{% url 'update' todo.id %}" class="nav-link" title="Update todo">Update</a>
     </li>
+    <li class="nav-item">
+        <a href="{% url 'delete' todo.id %}" class="nav-link" title="Delete todo">Delete</a>
+    </li>
 {% endblock %}
 {% block pagename %}Todo detail view{% endblock %}
 {% block content %}
@@ -15,26 +18,4 @@
     <p><b>Status:</b> {{ todo.status }}</p>
     <p><b>Created date:</b> {{ todo.created_date|date:"Y-m-d H:i:s." }}</p>
     <p><b>Updated date:</b> {{ todo.updated_date|date:"Y-m-d H:i:s." }}</p>
-
-    {#    ---------------------------------------------------------------#}
-    <div class="modal" tabindex="-1" id="DeleteTodo">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="DeleteTodo">{{ todo.summary }} №{{ todo.id }}</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete this todo?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">No</button>
-                    <form action="{% url 'delete' todo.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
