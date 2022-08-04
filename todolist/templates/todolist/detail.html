@@ -2,10 +2,10 @@
 {% block title %}Detail{% endblock %}
 {% block nav %}
     <li class="nav-item">
-        <a href="{% url 'update' todo.id %}" class="nav-link" title="Update todo">Update</a>
+        <a href="{% url 'todolist:update' todo.id %}" class="nav-link" title="Update todo">Update</a>
     </li>
     <li class="nav-item">
-        <a href="{% url 'delete' todo.id %}" class="nav-link" title="Delete todo">Delete</a>
+        <a href="{% url 'todolist:delete' todo.id %}" class="nav-link" title="Delete todo">Delete</a>
     </li>
 {% endblock %}
 {% block pagename %}Todo detail view{% endblock %}

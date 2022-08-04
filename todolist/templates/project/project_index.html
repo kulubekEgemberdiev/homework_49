@@ -4,7 +4,7 @@
 {% block title %} Main {% endblock %}
 {% block nav %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'project_create' %}" title="Create new project">Create</a>
+        <a class="nav-link" href="{% url 'todolist:project_create' %}" title="Create new project">Create</a>
     </li>
 {% endblock %}
 {% block search-block %}
@@ -28,7 +28,7 @@
                     </li>
                 </ul>
                 <div class="card-body bg-light">
-                    <a href="{% url 'project_detail' project.id %}" class="card-link" title="Detail view"><span
+                    <a href="{% url 'todolist:project_detail' project.id %}" class="card-link" title="Detail view"><span
                             class="material-symbols-outlined">visibility</span></a>
                 </div>
             </div>

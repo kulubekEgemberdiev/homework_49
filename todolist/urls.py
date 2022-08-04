@@ -4,6 +4,8 @@ from todolist.views.todolist_views import Index, DetailView, DeleteView, CreateV
 from todolist.views.project_views import ProjectIndexView, ProjectDetailView, ProjectCreateView, ProjectUpdateView, \
     ProjectDeleteView
 
+app_name = 'todolist'
+
 urlpatterns = [
     path("todolist/", Index.as_view(), name="index"),
     path("todolist/<int:pk>/detail/", DetailView.as_view(), name="detail"),

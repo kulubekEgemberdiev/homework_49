@@ -8,6 +8,6 @@
     {% csrf_token %}
     {% include "partial/forms.html" with button_text="Update" %}
     </form>
-<a href="{% url 'project_detail' projects.id %}" type="button" class="btn btn-danger mt-2" style="width: 120px">Cancel</a>
+<a href="{% url 'todolist:project_detail' projects.id %}" type="button" class="btn btn-danger mt-2" style="width: 120px">Cancel</a>
 
 {% endblock %}

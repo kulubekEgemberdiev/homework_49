@@ -2,13 +2,13 @@
 {% block title %}Detail{% endblock %}
 {% block nav %}
     <li class="nav-item">
-        <a href="{% url 'project_create' %}" class="nav-link" title="Create new project">Create</a>
+        <a href="{% url 'todolist:project_create' %}" class="nav-link" title="Create new project">Create</a>
     </li>
     <li class="nav-item">
-        <a href="{% url 'project_update' projects.id %}" class="nav-link" title="Update project">Update</a>
+        <a href="{% url 'todolist:project_update' projects.id %}" class="nav-link" title="Update project">Update</a>
     </li>
     <li class="nav-item">
-        <a href="{% url 'project_delete' projects.id %}" class="nav-link" title="Delete project">Delete</a>
+        <a href="{% url 'todolist:project_delete' projects.id %}" class="nav-link" title="Delete project">Delete</a>
     </li>
 {% endblock %}
 {% block pagename %}Project detail view{% endblock %}
@@ -23,18 +23,18 @@
         Todo-List</h4>
     <ul style="list-style-type: square">
         {% for todo in projects.todolist.all %}
-            <li style="margin-top: 15px"><a href="{% url 'detail' todo.id %}"
+            <li style="margin-top: 15px"><a href="{% url 'todolist:detail' todo.id %}"
                                             style="text-decoration: none; color: black"
                                             title="Task Detail View">{{ todo.summary }}</a>
 
-                <a href="{% url 'detail' todo.id %}" title="Task detail view."
+                <a href="{% url 'todolist:detail' todo.id %}" title="Task detail view."
                    style="width: 40px; height: 35px; text-decoration: none">
                     <span class="material-symbols-outlined" style="font-size: 25px; color: rgb(40, 30, 255);
                         margin: 0 15px;">
                         visibility
                     </span>
                 </a>
-                <a href="{% url 'update' todo.id %}" title="Update this task."
+                <a href="{% url 'todolist:update' todo.id %}" title="Update this task."
                    style="width: 40px; height: 35px; text-decoration: none">
                     <span class="material-symbols-outlined" style="font-size: 25px; color: rgb(4, 210, 20);">
                         edit
@@ -44,7 +44,7 @@
         {% empty %}
             <strong><p class="text-danger">There is no tasks!</p></strong>
         {% endfor %}
-        <a type="button" class="btn btn-secondary mt-5" href="{% url 'create' projects.id %}">Add new task.</a>
+        <a type="button" class="btn btn-secondary mt-5" href="{% url 'todolist:create' projects.id %}">Add new task.</a>
     </ul>
 {% endblock %}
 
