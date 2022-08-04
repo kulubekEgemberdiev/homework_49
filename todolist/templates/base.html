@@ -17,7 +17,7 @@
 <body>
 <nav class="navbar navbar-expand-sm navbar-light bg-warning">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'todolist:index' %}" title="Go to Main page">Main</a>
+        <a class="navbar-brand" href="{% url 'todolist:project_index' %}" title="Go to Main page">Main</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,6 +32,46 @@
             {% block search-block %}{% endblock %}
         </div>
     </div>
+    <a type="button"><span class="material-symbols-outlined" style="font-size: 30px; color: white; margin: 0 25px"
+                           data-bs-toggle="modal" data-bs-target="#AccountModal" title="Account management">manage_accounts</span></a>
+    {#AccountModal#}
+    <div class="modal fade" id="AccountModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            {% if request.user.is_authenticated %}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel" style="text-transform: uppercase">{{ user.username }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    To log out of your account, click "Logout".
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Cancel</button>
+                    <a href="{% url 'accounts:logout' %}" type="button" class="btn btn-outline-success">Logout</a>
+                </div>
+            </div>
+                {% else %}
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Sign in!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    To log into your account, click "Login".
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Cancel</button>
+                    <a href="{% url 'accounts:login' %}" type="button" class="btn btn-outline-success"
+                    style="text-decoration: none">Login</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {#AccountModal#}
+
 </nav>
 <div class="container">
     <h1 class="page-name">{% block pagename %}{% endblock %}</h1>
@@ -40,10 +80,10 @@
 
 </div>
 <footer>
-        <div class="container foot-cont">
-            Python-12. Egemberdiev Kulubek
-        </div>
-    </footer>
+    <div class="container foot-cont">
+        Python-12. Egemberdiev Kulubek
+    </div>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
