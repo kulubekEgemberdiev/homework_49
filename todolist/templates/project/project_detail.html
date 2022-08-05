@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Detail{% endblock %}
 {% block nav %}
+    {% if request.user.is_authenticated %}
     <li class="nav-item">
         <a href="{% url 'todolist:project_create' %}" class="nav-link" title="Create new project">Create</a>
     </li>
@@ -10,6 +11,7 @@
     <li class="nav-item">
         <a href="{% url 'todolist:project_delete' projects.id %}" class="nav-link" title="Delete project">Delete</a>
     </li>
+    {% endif %}
 {% endblock %}
 {% block pagename %}Project detail view{% endblock %}
 {% block content %}
@@ -34,17 +36,21 @@
                         visibility
                     </span>
                 </a>
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'todolist:update' todo.id %}" title="Update this task."
                    style="width: 40px; height: 35px; text-decoration: none">
                     <span class="material-symbols-outlined" style="font-size: 25px; color: rgb(4, 210, 20);">
                         edit
                     </span>
                 </a>
+                {% endif %}
             </li>
         {% empty %}
             <strong><p class="text-danger">There is no tasks!</p></strong>
         {% endfor %}
+    {% if request.user.is_authenticated %}
         <a type="button" class="btn btn-secondary mt-5" href="{% url 'todolist:create' projects.id %}">Add new task.</a>
+    {% endif %}
     </ul>
 {% endblock %}
 
