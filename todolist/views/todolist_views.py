@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.urls import reverse, reverse_lazy
 
@@ -58,14 +59,14 @@ class DetailView(TemplateView):
         return super().get_context_data(**kwargs)
 
 
-class DeleteView(DeleteView):
+class DeleteView(LoginRequiredMixin, DeleteView):
     template_name = "todolist/delete.html"
     model = TodolistModel
     context_object_name = 'todolist'
     success_url = reverse_lazy('project_index')
 
 
-class CreateView(CreateView):
+class CreateView(LoginRequiredMixin, CreateView):
     form_class = TodoForm
     template_name = "todolist/create.html"
 
@@ -78,7 +79,7 @@ class CreateView(CreateView):
         return reverse("project_detail", kwargs={"pk": self.object.project.pk})
 
 
-class UpdateView(UpdateView):
+class UpdateView(LoginRequiredMixin, UpdateView):
     model = TodolistModel
     template_name = "todolist/update.html"
     form_class = TodoForm
