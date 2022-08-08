@@ -12,17 +12,6 @@ class UserCreationForm(UserForm):
 
         self.fields['email'].required = True
 
-    # def clean(self):
-    #     first_name = self.cleaned_data['first_name']
-    #     last_name = self.cleaned_data.get('last_name')
-    #     if not first_name or last_name and not last_name or first_name:
-    #         raise ValidationError("You must fill in at least one of the following: First name or Last name.")
-    #     return first_name, last_name
-    #
-    #     if not first_name:
-    #         raise ValidationError("You must fill of the first name.")
-    #     return first_name
-
     def clean(self):
         cleaned_data = super(UserCreationForm, self).clean()
         first_name = cleaned_data.get('first_name')
