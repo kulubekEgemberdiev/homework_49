@@ -3,6 +3,7 @@ body {
 }
 
 .page-name {
+    justify-content: center;
     text-transform: uppercase;
     color: rgb(40, 40, 40);
     font-family: "Maiandra GD";
