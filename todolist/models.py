@@ -1,5 +1,6 @@
 from datetime import date
 
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -10,6 +11,7 @@ class ProjectModel(models.Model):
     description = models.TextField(max_length=2000, null=True, blank=True, verbose_name="Description")
     start_date = models.DateField(verbose_name="Start date")
     end_date = models.DateField(null=True, blank=True, verbose_name="End date")
+    users = models.ManyToManyField(get_user_model(), related_name='projects', verbose_name='Users')
 
     def __str__(self):
         return f"{self.id}. {self.name}. {self.start_date}. {self.end_date}."
@@ -18,6 +20,10 @@ class ProjectModel(models.Model):
         db_table = "project"
         verbose_name = "Project"
         verbose_name_plural = "Projects"
+        permissions = [
+            ('can_add_users_to_project', 'Can add users to Project'),
+            ('can_delete_users_in_project', 'Can delete users in Project')
+        ]
 
 
 class TodolistModel(models.Model):

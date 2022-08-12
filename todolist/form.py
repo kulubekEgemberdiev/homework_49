@@ -48,3 +48,12 @@ class ProjectForm(forms.ModelForm):
             "start_date": widgets.SelectDateWidget,
             "end_date": widgets.SelectDateWidget,
         }
+
+
+class AddUserForm(forms.ModelForm):
+    class Meta:
+        model = ProjectModel
+        fields = ['users']
+        widgets = {
+            'users': forms.CheckboxSelectMultiple()
+        }

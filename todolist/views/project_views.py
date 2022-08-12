@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -7,7 +8,7 @@ from django.utils.http import urlencode
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
-from todolist.form import SearchForm, ProjectForm
+from todolist.form import SearchForm, ProjectForm, AddUserForm
 from todolist.models import ProjectModel
 
 
@@ -85,3 +86,20 @@ class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     model = ProjectModel
     context_object_name = 'projects'
     success_url = reverse_lazy('project_index')
+
+
+class AddUserToProject(UpdateView):
+    model = ProjectModel
+    form_class = AddUserForm
+    template_name = 'project/add_user.html'
+
+    def form_valid(self, form):
+        user = self.request.user
+        if user.has_perm('todolist.can_add_users_to_project'):
+            project = form.save(commit=False)
+            form.save_m2m()
+            return redirect("todolist:project_detail", pk=project.pk)
+
+
+    def get_success_url(self):
+        return reverse("todolist:project_detail", kwargs={'pk': self.object.pk})
