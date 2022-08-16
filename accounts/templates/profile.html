@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}User{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block pagename %}Personal page of user{% endblock %}
+{% block content %}
+    <h2>{{ user.username }}</h2>
+    {% if user.profile.avatar %}
+        <img class="avatar" src="{{ user.profile.avatar.url }}" width="250" height="250" alt="user picture">
+    {% endif %}
+    <p><b>First name:    </b>{{ user.first_name }}</p>
+    <p><b>Last name:     </b>{{ user.last_name }}</p>
+    <p><b>Email:         </b>{{ user.email }}</p>
+    <p><b>GitHub:        </b>{{ user.profile.github }}</p>
+    <p><b>Yourself info: </b>{{ user.profile.about_info }}</p>
+    <p><b></b></p>
+{#    {% include "partial/articles_list_partial.html" %}#}
+{% endblock %}

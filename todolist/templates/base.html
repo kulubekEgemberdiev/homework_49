@@ -28,12 +28,17 @@
                     <a href="{% url 'todolist:index' %}" class="nav-link" title="Go to todolist">Todolist</a>
                 </li>
                 {% block nav %}{% endblock %}
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "accounts:profile" request.user.pk %}">{{ user.username }}</a>
+                </li>{% endif %}
             </ul>
+            <a type="button" class="nav-link btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#AccountModal"
+               title="Account management" style="text-transform: uppercase; color: white; font-weight: bolder;
+            ">Account</a>
             {% block search-block %}{% endblock %}
         </div>
     </div>
-    <a type="button"><span class="material-symbols-outlined" style="font-size: 30px; color: white; margin: 0 25px"
-                           data-bs-toggle="modal" data-bs-target="#AccountModal" title="Account management">manage_accounts</span></a>
     {#AccountModal#}
     <div class="modal fade" id="AccountModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
