@@ -63,7 +63,7 @@ class DeleteView(LoginRequiredMixin, DeleteView):
     template_name = "todolist/delete.html"
     model = TodolistModel
     context_object_name = 'todolist'
-    success_url = reverse_lazy('project_index')
+    success_url = reverse_lazy('todolist:project_index')
 
 
 class CreateView(LoginRequiredMixin, CreateView):
@@ -76,7 +76,7 @@ class CreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse("project_detail", kwargs={"pk": self.object.project.pk})
+        return reverse("todolist:project_detail", kwargs={"pk": self.object.project.pk})
 
 
 class UpdateView(LoginRequiredMixin, UpdateView):
@@ -85,4 +85,4 @@ class UpdateView(LoginRequiredMixin, UpdateView):
     form_class = TodoForm
 
     def get_success_url(self):
-        return reverse("detail", kwargs={"pk": self.object.pk})
+        return reverse("todolist:detail", kwargs={"pk": self.object.pk})

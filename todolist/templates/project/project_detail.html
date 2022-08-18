@@ -64,10 +64,10 @@
     <ul style="list-style-type: square">
     {% for user in projects.users.all %}
         <li style="margin-top: 15px">
-            {{ user }}
+            {{ user.username }}
             </li>
         {% empty %}
-            <strong><p class="text-danger">There is no tasks!</p></strong>
+            <strong><p class="text-danger">There is no participants!</p></strong>
     {% endfor %}
     </ul>
 {% endblock %}

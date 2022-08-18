@@ -1,10 +1,12 @@
-{% extends 'base.html' %}
-{% block title %}Add user{% endblock %}
-{% block pagename %}Add users to Project{% endblock %}
+{% extends "base.html" %}
+{% block title %}Add users{% endblock %}
 
+{% block pagename %}Add or delete users in {{ projectmodel.name }}{% endblock %}
 {% block content %}
-    <form method="post">
-    {% csrf_token %}
-    {% include 'partial/forms.html' with button_text='Add' %}
-    </form>
+    <div class="text-center">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% include "partial/forms.html" with button_text="Apply" %}
+        </form>
+    </div>
 {% endblock %}
