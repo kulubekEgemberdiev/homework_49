@@ -32,10 +32,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url "accounts:profile" request.user.pk %}">{{ user.username }}</a>
                     </li>{% endif %}
+                {% if perms.todolist.view_user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:user-list' %}">Users</a>
+                    </li>{% endif %}
                 {% if request.user.is_superuser %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin:index' %}">Admin(django)</a>
-                </li>{% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin:index' %}">Admin(django)</a>
+                    </li>{% endif %}
+
             </ul>
             <a type="button" class="nav-link btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#AccountModal"
                title="Account management" style="text-transform: uppercase; color: white; font-weight: bolder;

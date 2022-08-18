@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Detail{% endblock %}
 {% block nav %}
-    {% if request.user.is_authenticated %}
+    {% if perms.todolist.add_projectmodel %}
         <li class="nav-item">
             <a href="{% url 'todolist:project_create' %}" class="nav-link" title="Create new project">Create</a>
         </li>
@@ -10,7 +10,7 @@
         </li>
         <li class="nav-item">
             <a href="{% url 'todolist:project_delete' projects.id %}" class="nav-link" title="Delete project">Delete</a>
-        </li>
+        </li>{% endif %}{% if perms.todolist.can_change_members %}
         <li class="nav-item">
             <a href="{% url 'todolist:add_users' projects.id %}" class="nav-link" title="Add users to project">Add
                 users</a>
