@@ -9,5 +9,5 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('registration/', RegistrationView.as_view(), name='registration'),
-    path('user-<int:pk>/detail/', ProfileView.as_view(), name="profile")
+    path('user-<int:pk>/profile/', ProfileView.as_view(), name="profile")
 ]

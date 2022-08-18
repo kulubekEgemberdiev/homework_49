@@ -29,8 +29,12 @@
                 </li>
                 {% block nav %}{% endblock %}
                 {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "accounts:profile" request.user.pk %}">{{ user.username }}</a>
+                    </li>{% endif %}
+                {% if request.user.is_superuser %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "accounts:profile" request.user.pk %}">{{ user.username }}</a>
+                    <a class="nav-link" href="{% url 'admin:index' %}">Admin(django)</a>
                 </li>{% endif %}
             </ul>
             <a type="button" class="nav-link btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#AccountModal"
@@ -44,37 +48,41 @@
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             {% if request.user.is_authenticated %}
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel" style="text-transform: capitalize">{{ user.username }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    To log out of your account, click "Logout".
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Cancel</button>
-                    <a href="{% url 'accounts:logout' %}" type="button" class="btn btn-outline-success">Logout</a>
-                </div>
-            </div>
-                {% else %}
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Sign in!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"
+                            style="text-transform: capitalize">{{ user.username }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        To log out of your account, click "Logout".
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger me-3" data-bs-dismiss="modal">Cancel
+                        </button>
+                        <a href="{% url 'accounts:logout' %}" type="button" class="btn btn-outline-success">Logout</a>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    To log into your account, click "Login".<br>
-                    To register, click "Registration".
+            {% else %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Sign in!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        To log into your account, click "Login".<br>
+                        To register, click "Registration".
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger me-3 me-auto" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                        <a href="{% url 'accounts:login' %}" type="button" class="btn btn-outline-success"
+                           style="text-decoration: none">Login</a>
+                        <a href="{% url 'accounts:registration' %}" type="button" class="btn btn-outline-primary"
+                           style="text-decoration: none">Registration</a>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger me-3 me-auto" data-bs-dismiss="modal">Cancel</button>
-                    <a href="{% url 'accounts:login' %}" type="button" class="btn btn-outline-success"
-                    style="text-decoration: none">Login</a>
-                    <a href="{% url 'accounts:registration' %}" type="button" class="btn btn-outline-primary"
-                    style="text-decoration: none">Registration</a>
-                </div>
-            </div>
             {% endif %}
         </div>
     </div>

@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
@@ -60,16 +60,18 @@ class ProjectDetailView(DetailView):
         return context
 
 
-class ProjectCreateView(LoginRequiredMixin, CreateView):
+class ProjectCreateView(PermissionRequiredMixin, CreateView):
     form_class = ProjectForm
     template_name = "project/project_create.html"
+    permission_required = "todolist.add_projectmodel"
+
+    def get_success_url(self):
+        return reverse("todolist:project_detail", kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
-        project = form.save(commit=False)
-        project.save()
-        form.save_m2m()
-        return redirect("project_detail", pk=project.pk)
-
+        response = super().form_valid(form)
+        self.object.users.add(self.request.user)
+        return response
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = ProjectModel
@@ -78,28 +80,34 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = "projects"
 
     def get_success_url(self):
-        return reverse("project_detail", kwargs={"pk": self.object.pk})
+        return reverse("todolist:project_detail", kwargs={"pk": self.object.pk})
 
 
 class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "project/project_delete.html"
     model = ProjectModel
     context_object_name = 'projects'
-    success_url = reverse_lazy('project_index')
+    success_url = reverse_lazy('todolist:project_index')
 
 
-class AddUserToProject(UpdateView):
+class AddUserToProject(PermissionRequiredMixin, UpdateView):
     model = ProjectModel
+    template_name = "project/add_user.html"
+    permission_required = 'todolist.can_change_members'
     form_class = AddUserForm
-    template_name = 'project/add_user.html'
+
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().users.all()
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['pk'] = self.request.user.pk
+        return kwargs
 
     def form_valid(self, form):
-        user = self.request.user
-        if user.has_perm('todolist.can_add_users_to_project'):
-            project = form.save(commit=False)
-            form.save_m2m()
-            return redirect("todolist:project_detail", pk=project.pk)
-
+        response = super().form_valid(form)
+        self.object.users.add(self.request.user)
+        return response
 
     def get_success_url(self):
-        return reverse("todolist:project_detail", kwargs={'pk': self.object.pk})
+        return reverse('todolist:project_detail', kwargs={'pk': self.object.pk})
