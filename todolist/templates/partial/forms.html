@@ -1,3 +1,6 @@
+{% if not fields_only %}
+    {% csrf_token %}
+{% endif %}
 {% for field in form %}
     <p style="font-size: 18px; font-family: cursive; color: rgb(50,50,50)"><label for="{{ field.id_for_label }}">{{ field.label }}</label></p>
     {% for error in field.errors %}
@@ -6,4 +9,6 @@
     <p>{{ field }}</p>
 {% endfor %}
 
+{% if not fields_only %}
 <button type="submit" class="btn btn-success" style="width: 120px;">{{ button_text }}</button>
+{% endif %}
