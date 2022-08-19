@@ -59,7 +59,6 @@ class UsersListView(PermissionRequiredMixin, ListView):
     ordering = "-id"
     paginate_by = 8
     paginate_orphans = 1
-    permission_required = 'todolist.view_user'
 
     def get(self, request, *args, **kwargs):
         self.form = self.get_search_form()
@@ -90,3 +89,6 @@ class UsersListView(PermissionRequiredMixin, ListView):
         if self.form.is_valid():
             return self.form.cleaned_data["search"]
         return None
+
+    def has_permission(self):
+        return self.request.user.has_perm('todolist.view_user')
