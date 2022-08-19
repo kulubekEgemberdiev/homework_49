@@ -6,10 +6,10 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.http import urlencode
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 # Create your views here.
-from accounts.forms import UserCreationForm
+from accounts.forms import UserCreationForm, UserChangeForm, ProfileChangeForm
 from accounts.models import Profile
 from todolist.form import SearchForm
 
@@ -92,3 +92,38 @@ class UsersListView(PermissionRequiredMixin, ListView):
 
     def has_permission(self):
         return self.request.user.has_perm('todolist.view_user')
+
+
+class ProfileUpdateView(PermissionRequiredMixin, UpdateView):
+    model = User
+    form_class = UserChangeForm
+    template_name = 'profile_update.html'
+    profile_form = ProfileChangeForm
+    context_object_name = 'user_obf'
+
+
+    def has_permission(self):
+        return self.request.user.is_superuser or self.request.user == self.get_object()
+
+    def get_context_data(self, **kwargs):
+        contex = super().get_context_data(**kwargs)
+        if 'profile_form' not in contex:
+            contex['profile_form'] = self.profile_form(instance=self.get_object().profile)
+        return contex
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(instance=self.object, data=request.POST)
+        profile_form = self.profile_form(instance=self.object.profile, data=request.POST, files=request.FILES)
+        if form.is_valid() and profile_form.is_valid():
+            return self.form_valid(form, profile_form)
+        else:
+            return self.form_invalid(form, profile_form)
+
+    def form_valid(self, form, profile_form):
+        form.save()
+        profile_form.save()
+        return redirect('accounts:profile', self.object.pk)
+
+    def form_invalid(self, form, profile_form):
+        return self.render_to_response(self.get_context_data(form=form, profile_form=profile_form))
