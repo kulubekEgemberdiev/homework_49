@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Edit user{% endblock %}
+{% block pagename %}Editing user: {{ user_obf.username }}{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% include 'partial/forms.html' with fields_only=True %}
+            {% include 'partial/forms.html' with form=profile_form button_text='Update' %}
+        </form>
+    </div>
+{% endblock %}
