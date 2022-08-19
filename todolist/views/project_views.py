@@ -61,7 +61,9 @@ class ProjectDetailView(DetailView):
 class ProjectCreateView(PermissionRequiredMixin, CreateView):
     form_class = ProjectForm
     template_name = "project/project_create.html"
-    permission_required = "todolist.add_projectmodel"
+
+    def has_permission(self):
+        return self.request.user.has_perm('todolist.add_projectmodel')
 
     def get_success_url(self):
         return reverse("todolist:project_detail", kwargs={'pk': self.object.pk})
@@ -85,11 +87,14 @@ class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
         return reverse("todolist:project_detail", kwargs={"pk": self.object.pk})
 
 
-class ProjectDeleteView(LoginRequiredMixin, DeleteView):
+class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = "project/project_delete.html"
     model = ProjectModel
     context_object_name = 'projects'
     success_url = reverse_lazy('todolist:project_index')
+
+    def has_permission(self):
+        return self.request.user.has_perm('todolist.delete_projectmodel')
 
 
 class AddUserToProject(PermissionRequiredMixin, UpdateView):
