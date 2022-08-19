@@ -1,6 +1,7 @@
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect
@@ -39,6 +40,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
     template_name = "profile.html"
     paginate_by = 8
     paginate_orphans = 1
+    context_object_name = 'user_obj'
 
     def get_context_data(self, **kwargs):
         paginator = Paginator(self.get_object().projects.all(),
@@ -127,3 +129,10 @@ class ProfileUpdateView(PermissionRequiredMixin, UpdateView):
 
     def form_invalid(self, form, profile_form):
         return self.render_to_response(self.get_context_data(form=form, profile_form=profile_form))
+
+
+class UserPasswordChangeView(PasswordChangeView):
+    template_name = 'password_change.html'
+
+    def get_success_url(self):
+        return reverse("accounts:profile", kwargs={"pk": self.request.user.pk})

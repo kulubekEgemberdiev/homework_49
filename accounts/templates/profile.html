@@ -3,9 +3,14 @@
 {% block title %}User{% endblock %}
 
 {% block nav %}
+    {% if user_obj == user %}
     <li class="nav-item">
         <a href="{% url 'accounts:update_profile' user.id %}" class="nav-link" title="Update profile">Update profile</a>
     </li>
+    <li class="nav-item">
+        <a href="{% url 'accounts:change_password' %}" class="nav-link" title="Change password">Change password</a>
+    </li>
+    {% endif %}
 {% endblock %}
 
 {% block pagename %}Personal page of user{% endblock %}
