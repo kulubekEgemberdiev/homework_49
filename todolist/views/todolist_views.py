@@ -1,11 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Q
 from django.urls import reverse, reverse_lazy
 
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.utils.http import urlencode
-from django.views import View
-from django.views.generic import TemplateView, FormView, ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
 from todolist.form import TodoForm, SearchForm
@@ -59,16 +58,22 @@ class DetailView(TemplateView):
         return super().get_context_data(**kwargs)
 
 
-class DeleteView(LoginRequiredMixin, DeleteView):
+class DeleteView(PermissionRequiredMixin, DeleteView):
     template_name = "todolist/delete.html"
     model = TodolistModel
     context_object_name = 'todolist'
     success_url = reverse_lazy('todolist:project_index')
 
+    def has_permission(self):
+        return self.request.user.has_perm('todolist.delete_todolistmodel')
 
-class CreateView(LoginRequiredMixin, CreateView):
+
+class CreateView(PermissionRequiredMixin, CreateView):
     form_class = TodoForm
     template_name = "todolist/create.html"
+
+    def has_permission(self):
+        return self.request.user.has_perm('todolist.add_todolistmodel')
 
     def form_valid(self, form):
         project = get_object_or_404(ProjectModel, pk=self.kwargs.get("pk"))
@@ -79,10 +84,13 @@ class CreateView(LoginRequiredMixin, CreateView):
         return reverse("todolist:project_detail", kwargs={"pk": self.object.project.pk})
 
 
-class UpdateView(LoginRequiredMixin, UpdateView):
+class UpdateView(PermissionRequiredMixin, UpdateView):
     model = TodolistModel
     template_name = "todolist/update.html"
     form_class = TodoForm
+
+    def has_permission(self):
+        return self.request.user.has_perm('todolist.change_todolistmodel')
 
     def get_success_url(self):
         return reverse("todolist:detail", kwargs={"pk": self.object.pk})

@@ -71,11 +71,15 @@ class ProjectCreateView(PermissionRequiredMixin, CreateView):
         self.object.users.add(self.request.user)
         return response
 
-class ProjectUpdateView(LoginRequiredMixin, UpdateView):
+
+class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
     model = ProjectModel
     template_name = "project/project_update.html"
     form_class = ProjectForm
     context_object_name = "projects"
+
+    def has_permission(self):
+        return self.request.user.has_perm('todolist.change_projectmodel')
 
     def get_success_url(self):
         return reverse("todolist:project_detail", kwargs={"pk": self.object.pk})
